@@ -1,24 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import Header from './components/Header/Header';
+import ImageUpload from './components/ImageUpload/ImageUpload';
+import PostList from './components/Post/PostList/PostList';
+import SignIn from './components/SignIn/SignIn';
+import SignUp from './components/SignUp/SignUp';
+import { actionType } from './context/reducer';
+import { useStateValue } from './context/StateProvider';
+import { auth } from './firebase';
 
 function App() {
+  const [{ user }, dispatch] = useStateValue();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(authUser => {
+      if (authUser) {
+        dispatch({
+          type: actionType.SET_USER,
+          user: authUser
+        });
+      }
+    });
+
+    return () => unsubscribe();
+  }, [dispatch, user]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header />
+      <SignUp />
+      <SignIn />
+      <ImageUpload />
+      {user ? (
+        <PostList/>
+      ) : (
+          <div className="app__notlogged">
+            <h3>You are not logged in</h3>
+          </div>
+        )}
+
     </div>
   );
 }

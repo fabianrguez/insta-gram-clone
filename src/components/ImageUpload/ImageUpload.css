@@ -1,0 +1,35 @@
+.imageupload__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 80%;
+}
+
+.imageupload__title {
+    text-align: center;
+    align-self: flex-start;
+}
+
+.imageupload__caption {
+    width: 100%;
+    margin-bottom: 5px !important;
+}
+
+.imageupload__upload {
+    color: #0095f6 !important;
+    font-weight: 600 !important;
+}
+
+.imageupload__progress {
+    width: 100%;
+}
+
+.imageupload__preview {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}

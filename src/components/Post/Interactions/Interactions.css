@@ -1,0 +1,15 @@
+.interactions {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.interactions .interactions__interaction {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.interactions__interaction .MuiSvgIcon-root {
+    font-size: 28px;
+}

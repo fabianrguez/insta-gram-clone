@@ -1,0 +1,61 @@
+.header {
+    background-color: white;
+    padding: 20px;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.header__image {
+    object-fit: contain;
+}
+
+.header__signup, .header__logout {
+    color: #0095f6 !important;
+    font-weight: 700 !important;
+}
+
+.header__login {
+    background-color: #0095f6 !important;
+    color: #fff !important;
+}
+
+.header__notlogged * {
+    margin-right: 5px;
+}
+
+.header__notlogged .MuiButtonBase-root {
+    text-transform: unset;
+}
+
+.header__logout {
+    cursor: pointer;
+}
+
+.header__logged {
+    display: flex;
+    align-items: center;
+}
+
+.header__addphoto {
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.header__addphoto:active {
+    opacity: 0.6;
+}
+
+.header__menuitem {
+    background: #fefefe;
+}
+
+.header__menuitemicon {
+    margin-right: 5px;
+}

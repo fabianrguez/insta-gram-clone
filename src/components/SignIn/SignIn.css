@@ -1,0 +1,21 @@
+.signIn__form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+} 
+
+.signIn__form .MuiInputBase-root{
+    margin-bottom: 15px;
+}
+
+.signIn__image {
+    margin-bottom: 15px;
+    object-fit: containt;
+} 
+
+.signIn__submit {
+    background-color: #0095f6 !important;
+    color: white !important;
+    font-weight: 600 !important;
+    margin-top: 15px !important;
+}
