@@ -18,9 +18,9 @@
     margin-bottom: 5px !important;
 }
 
-.imageupload__upload {
-    color: #0095f6 !important;
-    font-weight: 600 !important;
+.MuiButtonBase-root {
+    color: #0095f6 ;
+    font-weight: 600;
 }
 
 .imageupload__progress {

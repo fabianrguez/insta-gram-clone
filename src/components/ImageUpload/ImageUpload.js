@@ -17,7 +17,7 @@ const ImageUpload = () => {
         dispatch({
             type: actionType.SET_IMAGEUPLOAD_MODAL_OPEN,
             imageUploadModalOpen: false
-        })
+        });
     }
 
     const handleChange = (e) => {
@@ -27,6 +27,7 @@ const ImageUpload = () => {
     }
 
     const handleUpload = () => {
+        // TODO save image on user profile or post 
         const uploadTask = storage.ref(`images/${image.name}`).put(image);
         uploadTask.on('state_changed', snapshot => {
             const _progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -44,7 +45,7 @@ const ImageUpload = () => {
                                 caption,
                                 imageUrl: url,
                                 username: user?.displayName
-                            })
+                            });
                     })
                 setProgress(0);
                 setCaption('');

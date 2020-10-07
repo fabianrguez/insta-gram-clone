@@ -13,5 +13,7 @@
 }
 
 .header__image {
+    height: 30px;
+    width: 100px;
     object-fit: contain;
 }
