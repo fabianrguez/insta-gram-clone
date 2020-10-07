@@ -37,6 +37,7 @@ const Header = () => {
             user: null
         });
         auth.signOut();
+        setAnchorEl(null);
     }
 
     const handleOpenMenu = (e) => {
