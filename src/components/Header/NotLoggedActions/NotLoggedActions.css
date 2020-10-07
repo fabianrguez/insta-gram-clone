@@ -1,0 +1,17 @@
+.notLoggedActions__signup, .notLoggedActions__logout {
+    color: #0095f6 !important;
+    font-weight: 700 !important;
+}
+
+.notLoggedActions__login {
+    background-color: #0095f6 !important;
+    color: #fff !important;
+}
+
+.notLoggedActions * {
+    margin-right: 5px;
+}
+
+.notLoggedActions .MuiButtonBase-root {
+    text-transform: unset;
+}

@@ -1,0 +1,25 @@
+.loggedActions {
+    display: flex;
+    align-items: center;
+}
+
+.loggedActions__addphoto {
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.loggedActions__addphoto:active {
+    opacity: 0.6;
+}
+
+.loggedActions__menuitem {
+    background: #fefefe;
+}
+
+.loggedActions__menuitemicon {
+    margin-right: 5px;
+}
+
+.loggedActions__avatar {
+    cursor: pointer;
+}
