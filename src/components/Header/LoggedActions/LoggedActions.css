@@ -23,3 +23,7 @@
 .loggedActions__avatar {
     cursor: pointer;
 }
+
+.loggedActions__menuitem:last-of-type {
+    border-top: 1px solid lightgray;
+}

@@ -1,5 +1,5 @@
 import { Avatar, Menu, MenuItem } from '@material-ui/core';
-import { AddAPhoto, ExitToApp } from '@material-ui/icons';
+import { AccountCircleOutlined, AddAPhoto, ExitToApp, SettingsOutlined } from '@material-ui/icons';
 import React, { useState } from 'react';
 import { actionType } from '../../../context/reducer';
 import { useStateValue } from '../../../context/StateProvider';
@@ -59,9 +59,17 @@ const LoggedActions = () => {
                     horizontal: 'center',
                 }}
             >
+                <MenuItem className="loggedActions__menuitem" onClick={() => {}}>
+                    <AccountCircleOutlined className="loggedActions__menuitemicon" />
+                        Profile
+                </MenuItem>
+                <MenuItem className="loggedActions__menuitem" onClick={() => {}}>
+                    <SettingsOutlined className="loggedActions__menuitemicon" />
+                        Configuration
+                </MenuItem>
                 <MenuItem className="loggedActions__menuitem" onClick={handleLogout}>
                     <ExitToApp className="loggedActions__menuitemicon" />
-                        Sign Out
+                        Exit
                 </MenuItem>
             </Menu>
         </div>
