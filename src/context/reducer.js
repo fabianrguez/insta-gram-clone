@@ -2,7 +2,8 @@ export const initialState = {
     user: null,
     signUpModalOpen: false,
     signInModalOpen: false,
-    imageUploadModalOpen: false
+    imageUploadModalOpen: false,
+    uploadImageToProfile: false
 }
 
 export const actionType = {

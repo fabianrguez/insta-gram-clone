@@ -26,7 +26,8 @@ const LoggedActions = () => {
     const handleImageUploadModalShown = () => {
         dispatch({
             type: actionType.SET_IMAGEUPLOAD_MODAL_OPEN,
-            imageUploadModalOpen: true
+            imageUploadModalOpen: true,
+            uploadImageToProfile: false
         });
     }
 

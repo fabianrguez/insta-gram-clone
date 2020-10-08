@@ -3,12 +3,12 @@ import firebase from 'firebase';
 import React, { useState } from 'react';
 import { actionType } from '../../context/reducer';
 import { useStateValue } from '../../context/StateProvider';
-import db, { storage } from '../../firebase';
+import db, { auth, storage } from '../../firebase';
 import ModalGram from '../ModalGram/ModalGram';
 import './ImageUpload.css';
 
 const ImageUpload = () => {
-    const [{ user, imageUploadModalOpen }, dispatch] = useStateValue();
+    const [{ user, imageUploadModalOpen, uploadImageToProfile }, dispatch] = useStateValue();
     const [caption, setCaption] = useState('');
     const [progress, setProgress] = useState(0);
     const [image, setImage] = useState(null);
@@ -26,27 +26,31 @@ const ImageUpload = () => {
         }
     }
 
+    const storeImageToPost = (url) => {
+        db.collection('posts')
+        .add({
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            caption,
+            imageUrl: url,
+            username: user?.displayName
+        });
+    }
+
+    const storeImageToProfile = (url) => {
+        auth.currentUser.updateProfile({photoUrl: url})
+    } 
+
     const handleUpload = () => {
-        // TODO save image on user profile or post 
         const uploadTask = storage.ref(`images/${image.name}`).put(image);
         uploadTask.on('state_changed', snapshot => {
             const _progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             setProgress(_progress);
         }, error => console.error(error)
             , () => {
-                const timestamp = firebase.firestore.FieldValue.serverTimestamp();
                 storage.ref('images')
                     .child(image.name)
                     .getDownloadURL()
-                    .then(url => {
-                        db.collection('posts')
-                            .add({
-                                timestamp,
-                                caption,
-                                imageUrl: url,
-                                username: user?.displayName
-                            });
-                    })
+                    .then(url => uploadImageToProfile ? storeImageToProfile(url) : storeImageToPost(url));
                 setProgress(0);
                 setCaption('');
                 setImage(null);
