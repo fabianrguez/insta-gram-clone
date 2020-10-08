@@ -58,7 +58,7 @@ const SignUp = () => {
                         label="Username"
                         variant="outlined"
                         type="text"
-                        autoCapitalize={false}
+                        autoCapitalize="off"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                     />
@@ -67,7 +67,7 @@ const SignUp = () => {
                         variant="outlined"
                         type="text"
                         value={email}
-                        autoCapitalize={false}
+                        autoCapitalize="off"
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <TextField

@@ -48,7 +48,7 @@ const SignIn = () => {
                         value={email}
                         variant="outlined"
                         label="Email"
-                        autoCapitalize={false}
+                        autoCapitalize="off"
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <TextField
