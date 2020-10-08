@@ -27,7 +27,9 @@ const SignIn = () => {
         dispatch({
             type: actionType.SET_SIGNIN_MODAL_OPEN,
             signInModalOpen: false
-        })
+        });
+        setEmail('');
+        setPassword('');
     } 
 
     return (

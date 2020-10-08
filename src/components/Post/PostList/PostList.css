@@ -4,3 +4,10 @@
     display: flex;
     justify-content: center;
 }
+
+.postlist__nopost {
+    color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

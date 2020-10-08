@@ -1,0 +1,90 @@
+.profile {
+    margin-top: 82px;
+    padding: 15px 0;
+    background-color: white;
+    border: 1px solid lightgray;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile__header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.profile__avatar {
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.profile__avatar.MuiAvatar-root { 
+    height: 80px ;
+    width: 80px;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+.profile__name h1 {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 22px;
+    margin-bottom: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.profile__name .profile__changeimage {
+    padding: 0;
+    color: #0095f6;
+    border: 0;
+    background: transparent;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.profile__form {
+    margin-top: 20px;
+    display: flex; 
+    flex-direction: column;
+    padding: 20px;
+}
+
+.profile__form > * {
+    margin: 5px 0 !important;
+    max-width: 500px;
+}
+
+.profile__stats {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    margin: 20px 0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile__stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: gray;
+}
+
+.profile__stat .profile__statnumber {
+    text-align: center;
+    color: #000000;
+    font-weight: 600;
+}
+
+.profile__posts {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.profile__postimage {
+    padding: 10px;
+    object-fit: contain;
+}

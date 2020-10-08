@@ -1,14 +1,17 @@
 import { Avatar, Menu, MenuItem } from '@material-ui/core';
-import { AccountCircleOutlined, AddAPhoto, ExitToApp, SettingsOutlined } from '@material-ui/icons';
+import { AccountCircleOutlined, AddAPhoto, ExitToApp, Home, HomeOutlined } from '@material-ui/icons';
 import React, { useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import { actionType } from '../../../context/reducer';
 import { useStateValue } from '../../../context/StateProvider';
 import { auth } from '../../../firebase';
 import './LoggedActions.css';
 
 const LoggedActions = () => {
-    const [{user}, dispatch] = useStateValue();
+    const [{ user }, dispatch] = useStateValue();
     const [anchorEl, setAnchorEl] = useState(null);
+    const history = useHistory();
+    const { pathname } = useLocation();
 
     const handleLogout = () => {
         dispatch({
@@ -17,6 +20,7 @@ const LoggedActions = () => {
         });
         auth.signOut();
         setAnchorEl(null);
+        history.push('/');
     }
 
     const handleOpenMenu = (e) => {
@@ -31,19 +35,29 @@ const LoggedActions = () => {
         });
     }
 
+    const redirect = (uri) => {
+        history.push(uri);
+        setAnchorEl(null);
+    }
+
     return (
         <div className="loggedActions">
-            <AddAPhoto
-                className="loggedActions__addphoto"
-                fontSize="large"
-                onClick={handleImageUploadModalShown}
-            />
+            {pathname && pathname === '/' ?
+                <Home
+                    className="loggedActions__home"
+                    fontSize="large" />
+                :
+                <HomeOutlined className="loggedActions__home" fontSize="large" onClick={() => redirect('/')}/>
+            }
+
             <Avatar
                 className="loggedActions__avatar"
-                alt={user.displayName}
-                src=""
+                alt={user?.displayName}
+                src={user?.photoURL}
                 onClick={handleOpenMenu}
-            />
+            >
+                { user && !user?.photoUrl ? [...user?.displayName][0] : ''}
+            </Avatar>
             <Menu
                 className="loggedActions__menu"
                 anchorEl={anchorEl}
@@ -60,13 +74,16 @@ const LoggedActions = () => {
                     horizontal: 'center',
                 }}
             >
-                <MenuItem className="loggedActions__menuitem" onClick={() => {}}>
+                <MenuItem 
+                    className="loggedActions__menuitem" 
+                    onClick={() => redirect(`/profile/${user?.displayName}`)}
+                >
                     <AccountCircleOutlined className="loggedActions__menuitemicon" />
                         Profile
                 </MenuItem>
-                <MenuItem className="loggedActions__menuitem" onClick={() => {}}>
-                    <SettingsOutlined className="loggedActions__menuitemicon" />
-                        Configuration
+                <MenuItem className="loggedActions__menuitem" onClick={handleImageUploadModalShown}>
+                    <AddAPhoto className="loggedActions__menuitemicon" />
+                        Add photo
                 </MenuItem>
                 <MenuItem className="loggedActions__menuitem" onClick={handleLogout}>
                     <ExitToApp className="loggedActions__menuitemicon" />

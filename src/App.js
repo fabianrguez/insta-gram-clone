@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import ImageUpload from './components/ImageUpload/ImageUpload';
-import PostList from './components/Post/PostList/PostList';
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import { actionType } from './context/reducer';
 import { useStateValue } from './context/StateProvider';
 import { auth } from './firebase';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from './components/Routes';
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
@@ -27,17 +28,13 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
-      <SignUp />
-      <SignIn />
-      <ImageUpload />
-      {user ? (
-        <PostList/>
-      ) : (
-          <div className="app__notlogged">
-            <h3>You are not logged in</h3>
-          </div>
-        )}
+      <Router>
+        <Header />
+        <SignUp />
+        <SignIn />
+        <ImageUpload />
+        <Routes/>
+      </Router>
 
     </div>
   );

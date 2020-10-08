@@ -1,6 +1,7 @@
 import { Avatar } from '@material-ui/core';
 import { formatDistanceToNow } from 'date-fns/esm';
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import db from '../../firebase';
 import Comment from './Comment/Comment';
 import CommentInput from './CommentInput/CommentInput';
@@ -11,6 +12,7 @@ const Post = ({ username, imageUrl, caption, timestamp, id }) => {
     const [comments, setComments] = useState([]);
     const [showCommentInput, setShowCommentInput] = useState(false);
     const postDate = new Date(timestamp?.toDate());
+    const history = useHistory();
 
     useEffect(() => {
         let unsubscribe;
@@ -28,7 +30,10 @@ const Post = ({ username, imageUrl, caption, timestamp, id }) => {
 
     return (
         <div className="post">
-            <div className="post__header">
+            <div 
+                className="post__header" 
+                onClick={() => history.push(`/profile/${username}`)}
+            >
                 <Avatar
                     className="post__avatar"
                     alt="stofaya"

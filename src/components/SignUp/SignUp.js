@@ -2,7 +2,7 @@ import { Button, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { actionType } from '../../context/reducer';
 import { useStateValue } from '../../context/StateProvider';
-import { auth } from '../../firebase';
+import db, { auth } from '../../firebase';
 import ModalGram from '../ModalGram/ModalGram';
 import './SignUp.css';
 
@@ -16,14 +16,24 @@ const SignUp = () => {
         e.preventDefault();
 
         auth.createUserWithEmailAndPassword(email, password)
-            .then(authUser => authUser.updateProfile({
-                displayName: username
-            }))
-            .catch(error => alert(error.message));
-            dispatch({
-                type: actionType.SET_SIGNUP_MODAL_OPEN,
-                signUpModalOpen: false
+            .then(authUser => {
+                authUser.user.updateProfile({
+                    displayName: username
+                });
+                db.collection('users').add({
+                    displayName: username,
+                    email: authUser.user.email,
+                    photoURL: ''
+                });
             })
+            .catch(error => alert(error.message));
+        dispatch({
+            type: actionType.SET_SIGNUP_MODAL_OPEN,
+            signUpModalOpen: false
+        });
+        setEmail('');
+        setPassword('');
+        setUsername('');
     }
 
     const handleModalClose = () => {

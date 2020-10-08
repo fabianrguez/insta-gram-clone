@@ -21,9 +21,12 @@ const PostList = () => {
 
     return (
         <div className="postlist">
-            <div className="app__posts">
-                {posts &&
+            <div className="postlist_posts">
+                {posts && posts.length > 0 ?
                     posts.map(({id, post}) => <Post key={id} id={id} {...post} />)
+                    : <div className="postlist__nopost">
+                        <h2>There are not posts to view</h2>
+                    </div>
                 }
             </div>
         </div>

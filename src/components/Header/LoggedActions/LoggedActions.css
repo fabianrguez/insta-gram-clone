@@ -3,14 +3,10 @@
     align-items: center;
 }
 
-.loggedActions__addphoto {
-    margin-right: 15px;
-    cursor: pointer;
-}
-
-.loggedActions__addphoto:active {
-    opacity: 0.6;
-}
+.loggedActions > * {
+    margin-right: 10px;
+    cursor: pointer
+} 
 
 .loggedActions__menuitem {
     background: #fefefe;
@@ -20,10 +16,14 @@
     margin-right: 5px;
 }
 
-.loggedActions__avatar {
-    cursor: pointer;
-}
-
 .loggedActions__menuitem:last-of-type {
     border-top: 1px solid lightgray;
+}
+
+.MuiSvgIcon-fontSizeLarge {
+    font-size: 2.5rem;
+}
+
+.loggedActions__avatar {
+    text-transform: uppercase;
 }
