@@ -37,7 +37,14 @@ const ImageUpload = () => {
     }
 
     const storeImageToProfile = (url) => {
-        auth.currentUser.updateProfile({photoUrl: url})
+        auth.currentUser.updateProfile({photoURL: url});
+        dispatch({
+            type: actionType.SET_USER,
+            user: auth.currentUser
+        });
+        db.collection('users')
+        .where('displayName', '==', user?.displayName)
+        .update({photoURL: url});
     } 
 
     const handleUpload = () => {

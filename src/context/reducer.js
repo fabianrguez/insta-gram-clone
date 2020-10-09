@@ -33,7 +33,8 @@ const reducer = (state, action) => {
         case actionType.SET_IMAGEUPLOAD_MODAL_OPEN:
             return {
                 ...state,
-                imageUploadModalOpen: action.imageUploadModalOpen
+                imageUploadModalOpen: action.imageUploadModalOpen,
+                uploadImageToProfile: action.uploadImageToProfile
             }
         default:
             return state;

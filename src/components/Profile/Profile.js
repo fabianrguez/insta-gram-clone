@@ -2,12 +2,12 @@ import { Avatar } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useStateValue } from '../../context/StateProvider';
+import { actionType } from '../../context/reducer';
 import db from '../../firebase';
-import Post from '../Post/Post';
 import './Profile.css';
 
 const Profile = () => {
-    const [{ user }] = useStateValue();
+    const [{ user }, dispatch] = useStateValue();
     const { username } = useParams();
     const [userProfile, setUserProfile] = useState(null);
     const [posts, setPosts] = useState([]);
@@ -33,6 +33,14 @@ const Profile = () => {
 
     }, [username])
 
+    const handleUploadImage = () => {
+        dispatch({
+            type: actionType.SET_IMAGEUPLOAD_MODAL_OPEN,
+            imageUploadModalOpen: true,
+            uploadImageToProfile: true
+        });
+    }
+
     return (
         <div className="profile">
             <div className="profile__header">
@@ -45,7 +53,12 @@ const Profile = () => {
                 <div className="profile__name">
                     <h1> {userProfile?.displayName}</h1>
                     {user && user.displayName === userProfile?.displayName ?
-                        <button className="profile__changeimage">Change profile photo</button>
+                        <button 
+                            className="profile__changeimage"
+                            onClick={handleUploadImage}
+                        >
+                            Change profile photo
+                        </button>
                         : <></>
                     }
                 </div>
@@ -65,7 +78,11 @@ const Profile = () => {
                 </div>
             </div>
             <div className="profile__posts">
-                {posts && posts.map(({id, post}) => <img className="profile__postimage" key={id} alt={post.caption} src={post.imageUrl}/>)}
+                {posts && posts.map(({id, post}) => (
+                    <div key={id} className="profile__post">
+                        <img className="profile__postimage"  alt={post.caption} src={post.imageUrl}/>
+                    </div>
+                ))}
             </div>
         </div>
     );
