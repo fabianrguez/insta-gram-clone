@@ -28,24 +28,26 @@ const ImageUpload = () => {
 
     const storeImageToPost = (url) => {
         db.collection('posts')
-        .add({
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            caption,
-            imageUrl: url,
-            username: user?.displayName
-        });
+            .add({
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                caption,
+                imageUrl: url,
+                username: user?.displayName,
+                userId: user?.uid
+            });
     }
 
     const storeImageToProfile = (url) => {
-        auth.currentUser.updateProfile({photoURL: url});
+        auth.currentUser.updateProfile({ photoURL: url });
         dispatch({
             type: actionType.SET_USER,
             user: auth.currentUser
         });
+        console.log(user.displayName);
         db.collection('users')
-        .where('displayName', '==', user?.displayName)
-        .update({photoURL: url});
-    } 
+            .doc(user.uid)
+            .update({ photoURL: url });
+    }
 
     const handleUpload = () => {
         const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -77,16 +79,18 @@ const ImageUpload = () => {
                             alt="preview"
                         />
                     }
+                    {!uploadImageToProfile &&
+                        <TextField
+                            variant="outlined"
+                            className="imageupload__caption"
+                            multiline
+                            rows={2}
+                            label="Enter a caption..."
+                            value={caption}
+                            onChange={e => setCaption(e.target.value)}
+                        />
+                    }
 
-                    <TextField
-                        variant="outlined"
-                        className="imageupload__caption"
-                        multiline
-                        rows={2}
-                        label="Enter a caption..."
-                        value={caption}
-                        onChange={e => setCaption(e.target.value)}
-                    />
                     <input type="file" onChange={handleChange} />
                     <progress className="imageupload__progress" value={progress} max="100" />
                     <Button

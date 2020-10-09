@@ -33,12 +33,22 @@ const LoggedActions = () => {
             imageUploadModalOpen: true,
             uploadImageToProfile: false
         });
+        setAnchorEl(null);
     }
 
     const redirect = (uri) => {
         history.push(uri);
         setAnchorEl(null);
     }
+
+    const showFirstLetterIfNotImage = () => {
+        if (user && !user.photoURL && user.displayName) {
+            return [...user.displayName][0].toUpperCase();
+        } else {
+            return;
+        }
+    }
+
 
     return (
         <div className="loggedActions">
@@ -47,7 +57,7 @@ const LoggedActions = () => {
                     className="loggedActions__home"
                     fontSize="large" />
                 :
-                <HomeOutlined className="loggedActions__home" fontSize="large" onClick={() => redirect('/')}/>
+                <HomeOutlined className="loggedActions__home" fontSize="large" onClick={() => redirect('/')} />
             }
 
             <Avatar
@@ -56,7 +66,7 @@ const LoggedActions = () => {
                 src={user?.photoURL}
                 onClick={handleOpenMenu}
             >
-                { user && !user?.photoUrl ? [...user?.displayName][0] : ''}
+                {showFirstLetterIfNotImage()}
             </Avatar>
             <Menu
                 className="loggedActions__menu"
@@ -74,8 +84,8 @@ const LoggedActions = () => {
                     horizontal: 'center',
                 }}
             >
-                <MenuItem 
-                    className="loggedActions__menuitem" 
+                <MenuItem
+                    className="loggedActions__menuitem"
                     onClick={() => redirect(`/profile/${user?.displayName}`)}
                 >
                     <AccountCircleOutlined className="loggedActions__menuitemicon" />

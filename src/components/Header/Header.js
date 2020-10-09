@@ -15,7 +15,7 @@ const Header = () => {
                 alt=""
             />
             <div className="header__links">
-                {!user ? <NotLoggedActions /> : <LoggedActions />}
+                {!user ? <NotLoggedActions /> : <LoggedActions/>}
             </div>
         </header>
     );

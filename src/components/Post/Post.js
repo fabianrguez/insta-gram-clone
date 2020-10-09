@@ -8,9 +8,10 @@ import CommentInput from './CommentInput/CommentInput';
 import Interactions from './Interactions/Interactions';
 import './Post.css';
 
-const Post = ({ username, imageUrl, caption, timestamp, id }) => {
+const Post = ({ username, imageUrl, caption, timestamp, id, userId }) => {
     const [comments, setComments] = useState([]);
     const [showCommentInput, setShowCommentInput] = useState(false);
+    const [userPhotoURL, setUserPhotoURL] = useState('');
     const postDate = new Date(timestamp?.toDate());
     const history = useHistory();
 
@@ -23,21 +24,26 @@ const Post = ({ username, imageUrl, caption, timestamp, id }) => {
                 .orderBy('timestamp', 'asc')
                 .onSnapshot(snapshot =>
                     setComments(snapshot.docs.map(comment => comment.data())));
+
+            db.collection('users')
+                .doc(userId)
+                .get()
+                .then(snapshot => setUserPhotoURL(snapshot.data().photoURL));
         }
 
         return () => unsubscribe();
-    }, [id]);
+    }, [id, userId]);
 
     return (
         <div className="post">
-            <div 
-                className="post__header" 
+            <div
+                className="post__header"
                 onClick={() => history.push(`/profile/${username}`)}
             >
                 <Avatar
                     className="post__avatar"
-                    alt="stofaya"
-                    src=""
+                    alt={caption}
+                    src={userPhotoURL || ''}
                 />
                 <h4 className="post__username">{username}</h4>
             </div>

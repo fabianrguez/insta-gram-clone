@@ -46,7 +46,7 @@ const Profile = () => {
             <div className="profile__header">
                 <Avatar
                     className="profile__avatar"
-                    src=""
+                    src={userProfile?.photoURL}
                     alt={username}>
                     {userProfile && !userProfile?.photoUrl ? [...userProfile?.displayName][0] : ''}
                 </Avatar>
@@ -80,7 +80,7 @@ const Profile = () => {
             <div className="profile__posts">
                 {posts && posts.map(({id, post}) => (
                     <div key={id} className="profile__post">
-                        <img className="profile__postimage"  alt={post.caption} src={post.imageUrl}/>
+                        <img className="profile__postimage" alt={post.caption} src={post.imageUrl}/>
                     </div>
                 ))}
             </div>

@@ -43,6 +43,11 @@
     font-weight: 600;
     cursor: pointer;
     font-size: 14px;
+    outline: none;
+}
+
+.profile__changeimage:active {
+    opacity: 0.6;
 }
 
 .profile__form {
@@ -86,13 +91,16 @@
 
 .profile__post {
     display: flex;
-    max-width: 180px;
-    height: 150px;
-    margin: 0 5px;
     cursor: pointer;
+    width: 33%;
+    position: relative;
+    max-width: 300px;     
+    max-height: 300px;
+    overflow: hidden;
 }
 
 .profile__postimage {
     object-fit: contain;
     width: 100%;
+    
 }
